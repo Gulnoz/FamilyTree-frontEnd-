@@ -9,7 +9,7 @@ const MenuBar = (props) => {
                     Home
            </Menu.Item >
 
-                <Menu.Item as={Link} to="/main">
+                <Menu.Item as={Link} to="/family" onClick={props.setCurrentFamilyToNull}>
                     Family
             </Menu.Item>
 
@@ -18,7 +18,7 @@ const MenuBar = (props) => {
             </Menu.Item>
 
                 <Menu.Menu position="right">
-                    <Menu.Item>
+                    <Menu.Item as={Link} to="/message" >
                         Messages
           </Menu.Item>
 

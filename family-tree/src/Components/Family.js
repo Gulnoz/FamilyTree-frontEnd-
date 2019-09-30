@@ -5,7 +5,7 @@ export default class Family extends React.Component {
         console.log(this.props.family.name)
         return (
             <React.Fragment>
-                <Card color="red" onClick={(e) => { this.props.setCurrentFamily(this.props.family)}}>
+                <Card color="red" onClick={(e) => { this.props.setFamilyMembers(this.props.family)}}>
                     <Image src={this.props.family.picture} />
                    
                     <Card.Content>

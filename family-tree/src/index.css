@@ -59,3 +59,6 @@ html {
 body, html {
    height: auto;
 }
+.messageForm{
+  width: 100%;
+}
