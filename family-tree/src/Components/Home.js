@@ -1,7 +1,8 @@
 import React from 'react';
 import Login from './Login'
 import MainPage from './MainPage'
-import { Route, NavLink, Switch } from 'react-router-dom';
+import MemberList from './MemberList'
+import { Route, NavLink, Switch, Link } from 'react-router-dom';
 import '../index.css';
 export default class Home extends React.Component {
    
@@ -40,28 +41,6 @@ export default class Home extends React.Component {
         })
     }
    
-    // signUpSubmit = event => {
-    //     event.preventDefault()
-    //     fetch("http://localhost:3000/member", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify({
-    //             username: this.state.username,
-    //             password: this.state.password
-    //         })
-    //     }).then(res => res.json())
-    //         .then(data => {
-    //             if (data.errors) {
-    //                 this.setState({
-    //                     errors: data.errors
-    //                 })
-    //             } else {
-    //                 this.props.logInUser(data.token, data.user_id)
-    //             }
-    //         })
-    // }
 
     render() {
         document.body.style.height = "auto";
@@ -71,9 +50,9 @@ export default class Home extends React.Component {
         return (
             <div class='home-div'>
                 {
-                       this.state.currenMember
+                    this.props.userLogedIn
                          ?
-                        <MainPage />
+                        <MemberList members={this.props.members} setCurrenMember={this.props.setCurrenMember}/>
                         : <><h1>Welcome to Family Tree Platform!</h1>
                         <Login name={this.state.name} password={this.state.password} changeHendler={this.changeHendler} onClickHendler={this.onClickHendler} />
                           </>

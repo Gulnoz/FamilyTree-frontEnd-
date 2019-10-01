@@ -5,7 +5,7 @@ const MessageForm = (props) => {
     return (
         <Segment color="blue" >
            
-            <Form onSubmit={(e) => { props.onClickHendler(e) }} class='messageForm'>
+            <Form onSubmit={(e) => { props.onClickHendler(e) }} className='messageForm'>
 
                 <Form.Field>
                     <label>Content:</label>
@@ -18,7 +18,7 @@ const MessageForm = (props) => {
                     <input name="picture" placeholder="link" value={props.picture} onChange={props.changeHendler} />
                 </Form.Field>
 
-                <Button type='submit'>Submit</Button>
+                <Button positive type='submit'>Submit</Button>
 
             </Form>
         </Segment>

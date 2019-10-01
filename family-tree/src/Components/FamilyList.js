@@ -57,12 +57,13 @@ export default class FamilyList extends React.Component {
         document.body.style.height = "auto";
         document.body.style.backgroundColor = "rgba(0,0,0,.4)";
         document.body.style.color='white'
+        console.log(this.props)
         return (
             <>
             <h2>Family list:</h2>
                 {this.props.currentFamily
                     ?
-                    <FamilyMemberList addFamilyMember={this.props.addFamilyMember} setFamilyMembers={this.props.setFamilyMembers} currentFamily={this.props.currentFamily} members={this.props.familyMembers} />
+                    <FamilyMemberList history={this.props.history} addFamilyMember={this.props.addFamilyMember} setFamilyMembers={this.props.setFamilyMembers} currentFamily={this.props.currentFamily} members={this.props.familyMembers} />
                     :
                     <>
                         <button onClick={() => { this.setState({ showForm: !this.state.showForm }) }}>Create new family!</button>

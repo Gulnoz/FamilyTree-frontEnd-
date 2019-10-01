@@ -2,6 +2,9 @@ import React from "react"
 import { Button, Form, Segment } from "semantic-ui-react"
 
 const LoginForm = (props) => {
+    document.body.style.height = "auto";
+    document.body.style.backgroundColor = "rgba(0,0,0,.4)";
+    
     return (
         <Segment compact color="blue">
             <Form onSubmit={(e)=>{props.onClickHendler(e)}}>

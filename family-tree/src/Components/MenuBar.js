@@ -22,7 +22,7 @@ const MenuBar = (props) => {
                         Messages
           </Menu.Item>
 
-                    <Menu.Item>
+                    <Menu.Item onClick={props.logOut}>
                         Log Out
           </Menu.Item>
 

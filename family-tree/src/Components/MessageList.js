@@ -1,19 +1,19 @@
 import React from 'react';
 import Message from './Message'
 import MessageForm from './MessageForm'
-export default class FamilyList extends React.Component {
+export default class MessageList extends React.Component {
     state = {
         showForm: false,
         content: '',
         picture: '',
-        newMessage: '',
-       
+        currentMessage: '',
+        edit: false
     }
 
-
+    
     messageHendler = () => {
         console.log(this.props.messages)
-        return this.props.messages.map(message => <Message key={message.id} message={message}/>)
+        return this.props.messages.map(message => <Message key={message.id} message={message} editOnClickHendler={this.editOnClickHendler}deleteMessage={this.props.deleteMessage}/>)
     }
     changeHendler = (event) => {
         this.setState({
@@ -29,24 +29,59 @@ export default class FamilyList extends React.Component {
             body: JSON.stringify({
                 content: this.state.content,
                 picture: this.state.picture,
-                member_id: this.props.currentMember,
+                member_id: this.props.currentMember.id,
                 family_id: this.props.currentFamily.id
-            })
-        }
-
-        )
+            })})
             .then(res => res.json())
             .then((message) => {
+         
+                console.log(message)
                 this.props.addMessages(message)
                 this.setState({
                     content: '',
                     picture: '',
                    
-                    newMessage: message
+                    // newMessage: message
                 })
             })
+       
     }
-    
+    editOnClickHendler=(message)=>{
+        
+        this.setState({
+        edit: true,
+        content: message.content,
+        picture: message.picture,
+        currentMessage: message
+        })
+    }
+
+    editMessage=(e)=>{
+        e.preventDefault()
+       
+        const id = this.state.currentMessage.id
+        fetch(`http://localhost:3000/message/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                content: this.state.content,
+                picture: this.state.picture
+                })
+        })
+        .then(res=>res.json())
+            .then(this.props.editMessageHendler)
+
+        this.setState({
+            currentMessage: '',
+            edit: false,
+            content: '',
+            picture: '',
+        })
+    }
+    onClickHendler=(e)=>{
+        console.log("onClickHendler")
+       return this.state.edit ? this.editMessage(e) : this.newMessage(e)
+    }
     render() {
         document.body.style.height = "auto";
         document.body.style.backgroundColor = "rgba(0,0,0,.4)";
@@ -58,7 +93,7 @@ export default class FamilyList extends React.Component {
               
                     {this.props.currentFamily
                         ?
-                    <MessageForm content={this.state.content} picture={this.state.picture} changeHendler={this.changeHendler} onClickHendler={this.newMessage} />
+                    <MessageForm content={this.state.content} picture={this.state.picture} changeHendler={this.changeHendler} onClickHendler={this.onClickHendler} />
                         : null}
                 
             

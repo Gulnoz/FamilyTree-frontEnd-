@@ -70,7 +70,7 @@ export default class FamilyMemberList extends React.Component {
    
     oneMember = () => {
         console.log(this.props.members[0])
-        return this.props.members.map(member => <Member key = {member.id} memberStatus={member.status} member={member.member} />)
+        return this.props.members.map(member => <Member history={this.props.history} key = {member.id} memberStatus={member.status} member={member.member} />)
     }
 
     render() {
