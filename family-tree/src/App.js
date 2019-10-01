@@ -143,7 +143,7 @@ setCurrentFamilyToNull=()=>{
         <Route path="/" exact component={Home} />
         <Route path="/home" exact render={() => {return this.state.currentMember ? <Redirect to='/family'/> : <Home members={this.state.members}userLogedIn={this.state.userLogedIn}setCurrenMember={this.setCurrenMember}currentMember={this.state.currentMember}/>}} />
         <Route path="/main" exact component={MainPage} />
-        <Route path="/message" exact render={() => <MessageList currentMember={this.state.currentMember} deleteMessage={this.deleteMessage} addMessages={this.addMessages} editMessageHendler={this.editMessageHendler} currentMember={this.state.currentMember} currentFamily={this.state.currentFamily} messages={this.state.messages}/> } />
+        <Route path="/message" exact render={() => { return this.state.currentMember ? <MessageList currentMember={this.state.currentMember} deleteMessage={this.deleteMessage} addMessages={this.addMessages} editMessageHendler={this.editMessageHendler}  currentFamily={this.state.currentFamily} messages={this.state.messages}/>  : null}} />
         <Route path="/family" exact render={this.familyListHendler}/>
         <Route path="/logIn" exact component={Login} />
        

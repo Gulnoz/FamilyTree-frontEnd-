@@ -11,7 +11,7 @@ export default class MemberList extends React.Component {
       render() {
         return (
             <>
-                Members:
+                <div >Select which member are you!</div>
                {this.oneMember()}
             </>
         )

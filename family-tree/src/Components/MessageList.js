@@ -7,13 +7,14 @@ export default class MessageList extends React.Component {
         content: '',
         picture: '',
         currentMessage: '',
+        likes: null,
         edit: false
     }
 
     
     messageHendler = () => {
         console.log(this.props.messages)
-        return this.props.messages.map(message => <Message key={message.id} message={message} editOnClickHendler={this.editOnClickHendler}deleteMessage={this.props.deleteMessage}/>)
+        return this.props.messages.map(message => <Message key={message.id} message={message} likeHendler={this.likeHendler} editOnClickHendler={this.editOnClickHendler}deleteMessage={this.props.deleteMessage}/>)
     }
     changeHendler = (event) => {
         this.setState({
@@ -29,6 +30,7 @@ export default class MessageList extends React.Component {
             body: JSON.stringify({
                 content: this.state.content,
                 picture: this.state.picture,
+                likes: 0,
                 member_id: this.props.currentMember.id,
                 family_id: this.props.currentFamily.id
             })})
@@ -40,7 +42,7 @@ export default class MessageList extends React.Component {
                 this.setState({
                     content: '',
                     picture: '',
-                   
+                    
                     // newMessage: message
                 })
             })
@@ -81,6 +83,22 @@ export default class MessageList extends React.Component {
     onClickHendler=(e)=>{
         console.log("onClickHendler")
        return this.state.edit ? this.editMessage(e) : this.newMessage(e)
+    }
+    likeHendler=(message)=>{
+       const id=message.id
+       let likes=message.likes+1
+        this.setState({
+            likes: likes
+        })
+
+        fetch(`http://localhost:3000/message/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                likes: likes
+               
+            })
+        })
     }
     render() {
         document.body.style.height = "auto";
