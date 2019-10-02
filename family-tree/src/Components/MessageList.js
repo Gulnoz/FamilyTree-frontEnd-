@@ -14,7 +14,7 @@ export default class MessageList extends React.Component {
     
     messageHendler = () => {
         console.log(this.props.messages)
-        return this.props.messages.map(message => <Message key={message.id} message={message} likeHendler={this.likeHendler} editOnClickHendler={this.editOnClickHendler}deleteMessage={this.props.deleteMessage}/>)
+        return this.props.messages.map(message => <Message key={message.id} message={message} likes={this.state.likes}likeHendler={this.likeHendler} editOnClickHendler={this.editOnClickHendler}deleteMessage={this.props.deleteMessage}/>)
     }
     changeHendler = (event) => {
         this.setState({
